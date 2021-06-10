@@ -7,6 +7,7 @@ import com.querydsl.core.types.dsl.Expressions;
 import com.querydsl.core.types.dsl.NumberExpression;
 import com.querydsl.jpa.JPAExpressions;
 import com.querydsl.jpa.impl.JPAQueryFactory;
+import com.study.querydsl.dto.MemberDto;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
@@ -34,7 +35,6 @@ class MemberTest {
 
     @PersistenceContext
     EntityManager em;
-
     JPAQueryFactory queryFactory;
 
     @BeforeEach
@@ -65,6 +65,7 @@ class MemberTest {
             System.out.println("member.team = " + member.getTeam());
         }
     }
+
 
     @Test
     @Rollback(value = false)
@@ -483,5 +484,36 @@ class MemberTest {
                 .fetchOne();
         //then
         System.out.println(result);
+    }
+
+    @Test
+    void projectionOne(){
+        //given
+
+        //when
+        List<String> result = queryFactory
+                .select(member.username)
+                .from(member)
+                .fetch();
+        //then
+        for(String s : result){
+            System.out.println(s);
+        }
+    }
+
+    @Test
+    void projectionTwo(){
+        //given
+
+        //when
+        List<Tuple> result = queryFactory
+                .select(member.username, member.age)
+                .from(member)
+                .fetch();
+        //then
+        for(Tuple tuple : result) {
+            System.out.println(tuple.get(member.username));
+            System.out.println(tuple.get(member.age));
+        }
     }
 }
