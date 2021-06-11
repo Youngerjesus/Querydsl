@@ -11,3 +11,5 @@ https://www.inflearn.com/course/Querydsl-%EC%8B%A4%EC%A0%84/dashboard
 - [Querydsl 기본 문법](docs/basic.md) 
 
 - [Querydsl 중급 문법](docs/advance.md)
+
+- [Querydsl 실무 활용 - 순수 JPA와 Querydsl](docs/pratice-1.md)
