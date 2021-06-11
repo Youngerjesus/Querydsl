@@ -310,10 +310,24 @@ public class InitMember {
     }
 }
 ```
-
 - @PostConstruct 와 @Transactional 을 분리시켜야 하는 이유로는 @PostConstruct 는 해당 빈 자체만 생성되었다고 가정하에 호출되지만 해당 빈에 관련한 AOP 등을 포함해서 전체
-스프링 어플리케이션 컨택스트의 초기화를 말하지는 않는다. 트랜잭션을 처리하는 AOP 등은 스프링 어플리케이션 컨택스트가 초기화가 되어야만 가능하다. 즉 @PostConstruct 만을 사용하면 @Transactional 을 이용하는게 
-가능하지 않다. 하지만 여기서는 @PostConstruct 안에서 @Transactional 을 이용하는 빈을 호출해서 사용하니까 이 빈이 초기화 되었다는건 @Transactional 을 이용할 수 있다는 시점을 말하므로 우회해서 사용하는게 가능하다.
+  스프링 어플리케이션 컨택스트의 초기화를 말하지는 않는다. 트랜잭션을 처리하는 AOP 등은 스프링 어플리케이션 컨택스트가 초기화가 되어야만 가능하다. 즉 @PostConstruct 만을 사용하면 @Transactional 을 이용하는게 
+  가능하지 않다. 하지만 여기서는 @PostConstruct 안에서 @Transactional 을 이용하는 빈을 호출해서 사용하니까 이 빈이 초기화 되었다는건 @Transactional 을 이용할 수 있다는 시점을 말하므로 우회해서 사용하는게 가능하다.
+
+##### 조회를 위한 MemberController  
+````java
+@RestController
+@RequiredArgsConstructor
+public class MemberController {
+
+    private final MemberJpaRepository memberJpaRepository;
+
+    @GetMapping("/v1/members")
+    public List<MemberTeamDto> searchMemberV1(MemberSearchCondition condition) {
+        return memberJpaRepository.searchByWhere(condition);
+    }
+}
+````
 
 
  
