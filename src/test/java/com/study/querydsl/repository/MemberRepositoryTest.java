@@ -1,6 +1,7 @@
 package com.study.querydsl.repository;
 
 import com.study.querydsl.domain.Member;
+import com.study.querydsl.domain.QMember;
 import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.SpringBootTest;
@@ -35,4 +36,18 @@ class MemberRepositoryTest {
         assertTrue(result2.contains(member));
     }
 
+    @Test
+    void querydslPredicateExecutorTest(){
+        //given
+        //when
+        QMember member = QMember.member;
+        Iterable<Member> result = memberRepository.findAll(
+                member.age.between(0, 40)
+                        .and(member.username.eq("member1"))
+        );
+        //then
+        for (Member findMember : result) {
+            System.out.println(findMember);
+        }
+    }
 }
