@@ -18,4 +18,4 @@ https://www.inflearn.com/course/Querydsl-%EC%8B%A4%EC%A0%84/dashboard
 
 - [Querydsl 스프링 데이터 JPA가 제공하는 Querydsl 기능](docs/pratice-3.md)
 
-- [우아한 형제들의 Querydsl 활용법](docs/woowahwan.md)
+- [우아한 형제들의 Querydsl 사용법](docs/woowahwan.md)
