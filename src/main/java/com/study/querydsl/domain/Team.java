@@ -22,7 +22,15 @@ public class Team {
     @OneToMany(mappedBy = "team")
     List<Member> members = new ArrayList<>();
 
+    @OneToOne
+    @JoinColumn(name = "member_id")
+    Member leader;
+
     public Team(String name) {
         this.name = name;
+    }
+
+    public Team(Long id){
+        this.id = id;
     }
 }
